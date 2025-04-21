@@ -29,6 +29,11 @@ const generateCopyConfig = (list) => {
 
 const config = {
   copy: generateCopyConfig(COPY_FILES), // 拷贝文件
+  defineConstants:{
+    TRIAL_API_URL: '"https://trial.hyacinth.cn/api/tinyapp"',
+    PRODUCTION_API_URL: '"https://prod.hyacinth.cn/api/tinyapp"',
+    DEVELOPMENT_API_URL: '"https://dev.hyacinth.cn/api/tinyapp"',
+  },
   projectName: pkg.name,
   date: "2024-11-11",
   designWidth: 750,
@@ -43,7 +48,6 @@ const config = {
   alias: {
     src: npath.resolve(process.cwd(), "src"),
   },
-  defineConstants: {},
   framework: "react",
   compiler: "webpack5",
   hmr: true,

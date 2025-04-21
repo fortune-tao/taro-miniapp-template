@@ -17,6 +17,10 @@ declare namespace NodeJS {
   }
 }
 
+declare const PRODUCTION_API_URL : string;
+declare const DEVELOPMENT_API_URL : string;
+declare const TRIAL_API_URL : string;
+
 // 扩展 Taro 的全局对象
 declare namespace Taro {
   interface TaroStatic {

@@ -1,7 +1,10 @@
 import Taro from "@tarojs/taro";
+import { useEffect } from "react";
 import uma, { defaultConfig } from "src/utils/trace";
 import useCheckUpdate from "./hooks/useCheckUpdate";
+import { getApiUrl } from "./utils/request";
 import "./app.less";
+
 
 const env = process.env.TARO_ENV || "weapp";
 const track = process.env.UMENG_TRACK || false;
@@ -23,6 +26,11 @@ if (track)
 
 const App = ({ children }: React.PropsWithChildren) => {
   useCheckUpdate();
+
+  useEffect(() => {
+    const apiUrl = getApiUrl();
+    console.log("🚀🚀🚀 当前 API 请求地址为：", apiUrl)
+  }, []);
 
   Taro.setNavigationBarColor({
     frontColor: "#000000",
