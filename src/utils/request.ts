@@ -9,6 +9,8 @@ import { getAccountInfoSync } from "@tarojs/taro";
  * 通过小程序账户信息中的envVersion字段判断当前运行环境。
  *
  * @returns {string} 对应环境的API接口地址字符串
+ * @warnning 该方法请谨慎使用，避免暴露内网环境配置信息。
+ * 不过可以参考该方法实现小程序在不同运行环境下的动态配置。
  */
 export const getApiUrl = () => {
   // 获取小程序账户信息对象，包含环境版本等配置信息

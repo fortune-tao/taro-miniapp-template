@@ -199,6 +199,13 @@ node >= 18.17.0
 
 
 
+### 动态获取`API`地址（谨慎使用）
+
+`src/utils/request.ts`文件中实现了根据小程序当前环境获取`API`地址的方法：`getApiUrl`。
+
+参考：[微信小程序getAccountInfoSync判断环境、自动更新版本号](https://juejin.cn/post/7229595897813434429)
+
+> 有暴露测试环境、开发环境地址的风险。请谨慎使用。
 
 
 
