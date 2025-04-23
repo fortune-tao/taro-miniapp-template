@@ -1,219 +1,217 @@
-## 本地开发
+# Taro-Miniapp-Template
 
-### 版本要求
-node >= 18.17.0
-
-- #### 安装依赖
-
-  ```shell
-  pnpm install
-  ```
-- #### 启动本地开发服务
-
-  ```shell
-  pnpm run dev:weapp
-  ```
-- #### 启动开发者工具预览及调试
-
-  ```shell
-  微信开发者工具打开 weapp 文件夹并运行
-  ```
-
-## 生产打包
-
-- **运行生产打包命令**
-
-  ```shell
-  pnpm run build:weapp
-  ```
-
-  
-
-## 发布版本
-
-- **发布预览版本**
-- **发布生产版本**
+[![Taro](https://img.shields.io/badge/Taro-3.x-brightgreen)](https://taro-docs.jd.com/) [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18.17.0-blue)](https://nodejs.org/) [![pnpm](https://img.shields.io/badge/pnpm-%3E%3D8.0.0-orange)](https://pnpm.io/)
 
 
 
-## 所用技术
+> 一个基于 Taro 3.x 的并集成 Tailwind CSS 和 Zustand 等技术栈的小程序开发模板。
+>
+> 当前仅支持适配微信、支付宝小程序。如果需要适配其他端，需自行安装 Taro 所需依赖。不建议使用该模板开发 RN 应用。
 
-- [Taro](https://taro-docs.jd.com/docs)
-- [React](https://github.com/zenghongtu/react-use-chinese/blob/master/README.md)
-- [zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)
-- [weapp-tailwindcss](https://weapp-tw.icebreaker.top/docs/quick-start/frameworks/taro)
-- [lodash](https://www.lodashjs.com/)
-- [dayjs](https://day.js.org/zh-CN/)
+------
 
-## 所用组件库
+## 🚀 快速开始
 
-- [@antmjs/vantui](https://antmjs.github.io/vantui/#/home)
+### 环境要求
 
+- Node.js >= 18.17.0
+- pnpm >= 8.0.0
+- 微信开发者工具最新版
 
+### 开发流程
 
+#### 1. 安装依赖
 
-## VSCode 配置说明
-
-- 推荐安装
-
-  - `eslint`、`tslint`、`stylelint`、`prettier`
-  
-- 推荐使用 VScode->Preferences->setting，设置
-
-  ```js
-  {
-    'eslint.autoFixOnSave': true,
-    'tslint.autoFixOnSave': true,
-    'eslint.validate': [
-      'javascript',
-      'javascriptreact',
-      'html',
-      {
-        language: 'typescript',
-        autoFix: true,
-      },
-      {
-        language: 'typescriptreact',
-        autoFix: true,
-      },
-    ],
-    'prettier.stylelintIntegration': true,
-    '[css]': {
-      'editor.formatOnSave': true,
-    },
-    '[scss]': {
-      'editor.formatOnSave': true,
-    },
-  }
-  ```
-
-## 目录结构
-
-```text
-├── config
-├── README.md
-├── package.json
-├── src
-│   ├── constant
-│   ├── components
-│   ├── hooks
-│   ├── store
-│   ├── pages
-│   ├── styles
-│   ├── types
-│   ├── utils
-|	      ├── index.ts
-|	      └── request.ts
-│   ├── app.config.ts
-│   ├── app.less
-│   ├── app.tsx
-│   └── index.html
-├── types
-│   └── global.d.ts
-├── .editorconfig
-├── .eslintrc
-├── .gitignore
-├── .npmrc
-├── babel.config.js
-├── project.config.json
-├── project.private.config.json
-├── postcss.config.js
-├── tailwind.config.js
-├── tsconfig.json
-└── pnpm-lock.yaml
+```shell
+pnpm install
 ```
 
+#### 2. 启动本地开发服务
 
-### 性能优化
+```shell
+pnpm run dev:weapp
+```
 
-> 请参考[小程序性能优化指南 | Taro 文档](https://nervjs.github.io/taro-docs/docs/optimized)。
+#### 3. 预览与调试
 
-- 针对页面内容渲染较多，导致页面进入时白屏率过高时，可通过`Taro.nextTick()`对非首屏展示的内容进行延时渲染，以减少用户等待时间；
+打开微信开发者工具，导入 `weapp` 目录并运行。
 
-  > 为了方便，可以抽成一个组件在多个地方使用。
+------
 
-  ```tsx
-  /**
-   * 使用该组件包裹，延迟渲染
-   */
-  const NextTickComponent: React.FC = ({ children }) => {
-    const [isMounted, setIsMounted] = useState(false);
-  
-    useEffect(() => {
-      Taro.nextTick(() => {
-        setIsMounted(true);
-      });
-    }, []);
-  
-    return isMounted ? <>{children}</> : null;
-  };
-  
-  export default NextTickComponent;
-  
-  
-  // 用法
-  <NextTickComponent>
-    <Content />
-  </NextTickComponent>
-  ```
+## 📦 生产构建
 
-  
+运行以下命令生成生产包：
 
-- 跳转预加载在 [官方文档](https://link.juejin.cn/?target=https%3A%2F%2Ftaro-docs.jd.com%2Fdocs%2Foptimized%23%E8%B7%B3%E8%BD%AC%E9%A2%84%E5%8A%A0%E8%BD%BD) 有说明，小程序由 A 页面跳转到 B 页面的过程中，从 A 页面发起跳转到 B 页面触发 onLoad，有着 300~400 毫秒的延时。我们可以在跳转的同时，开始请求相对慢的接口，能够在进入B页面时尽快拿到数据；
+```shell
+pnpm run build:weapp
+```
 
-  ```tsx
-  // A页面
-  Taro.preload({
-    RequestPromise: getData(),
-  })
-  Taro.navigateTo({ url: '/pages/B/B' })
-  
-  // B页面
+------
+
+## 🛠 技术栈
+
+### 核心框架
+
+- **[Taro 3.x](https://docs.taro.zone/docs/3.x/)**：多端开发框架
+- **React 18**：前端组件化开发
+- **TypeScript**：静态类型检查
+
+### 状态管理
+
+- **[Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)**：轻量级状态管理库
+
+### 样式方案
+
+- **[Tailwind CSS 3.x](https://v3.tailwindcss.com/docs/installation)**：实用优先的 CSS 框架
+- **[weapp-tailwindcss](https://weapp-tw.icebreaker.top/docs/quick-start/frameworks/taro)**：Tailwind CSS 在小程序中的适配方案
+
+### 组件库
+
+- **[@antmjs/vantui](https://antmjs.github.io/vantui/#/home)**：基于有赞 VantWeapp 开发的同时支持 Taro 和 React 的 UI 库
+
+### 工具库
+
+- **Lodash**：常用工具函数
+- **Dayjs**：轻量级日期处理库
+
+------
+
+## 📁 项目结构
+
+```text
+├── config/             # Taro 编译配置
+├── src/
+│   ├── constant/       # 常量定义
+│   ├── components/     # 通用组件
+│   ├── hooks/          # 自定义 Hooks
+│   ├── store/          # Zustand 状态管理
+│   ├── pages/          # 页面组件
+│   ├── styles/         # 全局样式
+│   ├── types/          # TypeScript 类型定义
+│   ├── utils/          # 工具函数
+│   │   ├── index.ts    # 工具函数入口
+│   │   └── request.ts  # 请求封装
+│   ├── app.config.ts  # 应用配置
+│   ├── app.less        # 全局样式
+│   ├── app.tsx         # 应用入口
+│   └── index.html      # HTML 模板
+├── types/              # 全局类型定义
+│   └── global.d.ts
+├── .editorconfig       # 编码规范配置
+├── .eslintrc           # ESLint 配置
+├── .gitignore          # Git 忽略文件
+├── babel.config.js     # Babel 配置
+├── postcss.config.js   # PostCSS 配置
+├── tailwind.config.js  # Tailwind CSS 配置
+├── tsconfig.json       # TypeScript 配置
+└── pnpm-lock.yaml      # 依赖锁定文件
+```
+
+------
+
+## ⚡ 性能优化
+
+### 1. 延迟渲染
+
+针对页面内容较多的情况，使用 `Taro.nextTick()` 延迟非首屏内容的渲染，减少白屏时间。
+
+```tsx
+const NextTickComponent: React.FC = ({ children }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
-    Taro.getCurrentInstance().preloadData?.RequestPromise?.then(res => {
-      // 获取数据，更新渲染
-    })
+    Taro.nextTick(() => setIsMounted(true));
   }, []);
-  ```
 
-- 图片优化。适当压缩图片大小，对于长图可以分割图片，开启`lazyload`懒加载。要注意的是页面要在三屏以上，懒加载功能才会生效，就是说上一屏、当前屏、下一屏的图片是立刻加载的，之外的才会懒加载；
+  return isMounted ? <>{children}</> : null;
+};
 
-- 对于数据实时性要求较低的文章、商品展示页面，可以自行实现缓存优先策略；
+export default NextTickComponent;
 
-- 项目中比较复杂、更新渲染有性能问题的组件可以尝试使用`Taro`官方提供的[小程序性能优化组件](https://link.juejin.cn/?target=https%3A%2F%2Ftaro-docs.jd.com%2Fblog%2F2021-03-10-taro-3-1-lts%232-%E6%96%B0%E5%A2%9E%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%BB%84%E4%BB%B6-customwrapper)：CustomWrapper来包裹该组件。
+// 使用示例
+<NextTickComponent>
+  <Content />
+</NextTickComponent>
+```
 
-  ```jsx
-  <CustomWrapper>  
-    <GoodsList>
-  </CustomWrapper>
-  ```
+### 2. 跳转预加载
 
+在页面跳转时提前加载数据，缩短目标页面的加载时间。
 
+```tsx
+// A 页面
+Taro.preload({
+  RequestPromise: getData(),
+});
+Taro.navigateTo({ url: '/pages/B/B' });
 
-### 埋点集成
+// B 页面
+useEffect(() => {
+  Taro.getCurrentInstance().preloadData?.RequestPromise?.then((res) => {
+    // 更新状态
+  });
+}, []);
+```
 
-- 参考文档：[微信小程序集成](https://developer.umeng.com/docs/147615/detail/147619)、[支付宝小程序集成](https://developer.umeng.com/docs/147615/detail/147727)、[uni-app多端小程序框架集成](https://developer.umeng.com/docs/147615/detail/178170)
+### 3. 图片优化
 
+- 压缩图片大小
+- 对长图进行分割
+- 开启 `lazyload` 懒加载（注意：懒加载仅对三屏以外的图片生效）
 
-- 参考代码：[Taro集成demo](https://github.com/umeng/mp-demos/tree/master/taro)
+### 4. 缓存策略
 
+对于实时性要求较低的数据（如文章、商品展示），可以实现缓存优先策略。
 
+### 5. 使用性能优化组件
 
-### 动态获取`API`地址（谨慎使用）
+复杂组件可使用 Taro 官方提供的 `CustomWrapper` 包裹，提升渲染性能。
 
-`src/utils/request.ts`文件中实现了根据小程序当前环境获取`API`地址的方法：`getApiUrl`。
+```jsx
+<CustomWrapper>
+  <GoodsList />
+</CustomWrapper>
+```
 
-参考：[微信小程序getAccountInfoSync判断环境、自动更新版本号](https://juejin.cn/post/7229595897813434429)
+------
 
-> 有暴露测试环境、开发环境地址的风险。请谨慎使用。
+## 📊 埋点集成
 
+支持微信、支付宝双端埋点集成。
 
+### 参考文档
 
-### 开发注意事项
+- [微信小程序集成](https://developer.umeng.com/docs/147615/detail/147619)
+- [支付宝小程序集成](https://developer.umeng.com/docs/147615/detail/147727)
+- [uni-app 多端小程序框架集成](https://developer.umeng.com/docs/147615/detail/178170)
 
-> 1. 当代码更新后，开发者工具不会相应更新时。考虑：关闭`Taro`的`cache`缓存、关闭开发者工具热重载；
-> 2. `@antmjs/vantui`的组件使用`tailwindcss`类名有时不会生效；
-> 3. 最新版微信开发者工具的真机调试有问题，`真机调试1.0`无法运行，推荐切换至`真机调试2.0`，或者回退开发者工具版本；
-> 4. `Taro`的`dev`和`build`命令切换运行后，需要在微信开发者工具中清除缓存后，重新启动编译；
-> 5. 每次发布版本推荐将`js`转为`es5`版本，提高兼容性；
-> 6. `Swiper`组件建议使用`Taro`官方的`Swiper`组件，因为`Taro`官方的`Swiper`组件支持的功能更多，且`@antmjs/vantui`的`Swiper`组件在某些情况下的切换动画效果会有问题，交互不好。
+### 示例代码
+
+[Taro 集成 Demo](https://github.com/umeng/mp-demos/tree/master/taro)
+
+------
+
+## 🔒 动态获取 API 地址
+
+`src/utils/request.ts` 提供了根据当前环境动态获取 API 地址的方法 `getApiUrl`。
+
+> 注意：暴露测试环境或开发环境地址可能带来安全风险，请谨慎使用。
+
+------
+
+## ⚠️ 开发注意事项
+
+1. **缓存问题**
+   - 当代码更新后，开发者工具未同步更新时，尝试关闭 Taro 的缓存或禁用开发者工具的热重载功能。
+2. **Tailwind CSS 兼容**
+   - `@antmjs/vantui`的组件有时无法正确应用 Tailwind CSS 类名，请确保样式正确覆盖。
+3. **真机调试**
+   - 最新版微信开发者工具可能存在真机调试问题，推荐切换至「真机调试 2.0」或回退开发者工具版本。
+4. **清除缓存**
+   - 切换`dev`和`build`命令后，需在微信开发者工具中清除缓存并重新编译。
+5. **兼容性**
+   - 发布版本时建议将`JS`转为`ES5`，以提高兼容性。
+6. **Swiper 组件**
+   - 推荐使用 Taro 官方的`Swiper`组件，避免动画效果问题。
+7. **Toast 提示**
+   - 推荐使用`Taro.showToast()`实现统一的 Toast 提示。

@@ -29,7 +29,7 @@ const generateCopyConfig = (list) => {
 
 const config = {
   copy: generateCopyConfig(COPY_FILES), // 拷贝文件
-  defineConstants:{
+  defineConstants: {
     TRIAL_API_URL: '"https://trial.hyacinth.cn/api/tinyapp"',
     PRODUCTION_API_URL: '"https://prod.hyacinth.cn/api/tinyapp"',
     DEVELOPMENT_API_URL: '"https://dev.hyacinth.cn/api/tinyapp"',
