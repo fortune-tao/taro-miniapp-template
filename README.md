@@ -212,6 +212,8 @@ useEffect(() => {
 5. **兼容性**
    - 发布版本时建议将`JS`转为`ES5`，以提高兼容性。
 6. **Swiper 组件**
-   - 推荐使用 Taro 官方的`Swiper`组件，避免动画效果问题。
-7. **Toast 提示**
-   - 推荐使用`Taro.showToast()`实现统一的 Toast 提示。
+   - 推荐使用 Taro 官方的`Swiper`组件，而不是`vantui`的。以避免动画效果问题。
+7. **ImageViewer 组件**
+   - 不建议使用`@antmjs/vantui`的图片预览组件，因为是基于`Swiper`组件的。
+8. **Toast 提示**
+   - 推荐使用`Taro.showToast()`实现统一的`Toast`提示。
