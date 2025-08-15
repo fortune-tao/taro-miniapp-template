@@ -1,29 +1,48 @@
 {
-  "miniprogramRoot": "",
-  "projectname": "hyacinth-wxapp",
-  "description": "Taro微信小程序",
-  "setting": {
-    "urlCheck": true,
-    "es6": false,
-    "postcss": false,
-    "minified": false,
-    "enhance": false,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
+    "miniprogramRoot": "",
+    "projectname": "taro-wxapp",
+    "description": "Taro微信小程序",
+    "setting": {
+        "urlCheck": true,
+        "es6": false,
+        "postcss": false,
+        "minified": false,
+        "enhance": false,
+        "preloadBackgroundData": false,
+        "coverView": true,
+        "autoAudits": false,
+        "showShadowRootInWxmlPanel": true,
+        "uglifyFileName": false,
+        "checkInvalidKey": true,
+        "uploadWithSourceMap": true,
+        "compileHotReLoad": true,
+        "lazyloadPlaceholderEnable": false,
+        "useMultiFrameRuntime": true,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        },
+        "packNpmManually": false,
+        "packNpmRelationList": [],
+        "minifyWXSS": true,
+        "disableUseStrict": false,
+        "showES6CompileOption": false,
+        "useCompilerPlugins": false,
+        "ignoreUploadUnusedFiles": false,
+        "useStaticServer": true
+    },
+    "compileType": "miniprogram",
+    "appid": "",
+    "compileHotReLoad": true,
+    "libVersion": "3.6.4",
+    "packOptions": {
+        "ignore": [],
+        "include": []
+    },
+    "condition": {},
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
     }
-  },
-  "compileType": "miniprogram",
-  "appid": "wx28xx1993092xxxx3",
-  "libVersion": "3.6.4",
-  "packOptions": {
-    "ignore": [],
-    "include": []
-  },
-  "condition": {},
-  "editorSetting": {
-    "tabIndent": "insertSpaces",
-    "tabSize": 2
-  }
 }

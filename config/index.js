@@ -16,93 +16,104 @@ const COPY_FILES = ["project.private.config.json"]
 process.env.TARO_ENV = process.env.TARO_ENV ?? "weapp";
 process.env.NODE_ENV = process.env.NODE_ENV ?? "production";
 const generateCopyConfig = (list) => {
-  const patterns = [];
-  list.forEach((file) => {
-    if (fs.existsSync(file))
-      patterns.push({
-        from: file,
-        to: `${process.env.TARO_ENV}/${file}`,
-      });
-  });
-  return { patterns };
+    const patterns = [];
+    list.forEach((file) => {
+        if (fs.existsSync(file))
+            patterns.push({
+                from: file,
+                to: `${process.env.TARO_ENV}/${file}`,
+            });
+    });
+    return { patterns };
 };
 
 const config = {
-  copy: generateCopyConfig(COPY_FILES), // 拷贝文件
-  defineConstants: {
-    TRIAL_API_URL: '"https://trial.hyacinth.cn/api/tinyapp"',
-    PRODUCTION_API_URL: '"https://prod.hyacinth.cn/api/tinyapp"',
-    DEVELOPMENT_API_URL: '"https://dev.hyacinth.cn/api/tinyapp"',
-  },
-  projectName: pkg.name,
-  date: "2024-11-11",
-  designWidth: 750,
-  deviceRatio: {
-    640: 2.34 / 2,
-    750: 1,
-    375: 2,
-    828: 1.81 / 2,
-  },
-  sourceRoot: "src",
-  outputRoot: process.env.TARO_ENV,
-  alias: {
-    src: npath.resolve(process.cwd(), "src"),
-  },
-  framework: "react",
-  compiler: "webpack5",
-  hmr: true,
-  cache: {
-    enable: true, // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
-  },
-  mini: {
-    webpackChain(chain) {
-      miniChain(chain);
+    copy: generateCopyConfig(COPY_FILES), // 拷贝文件
+    defineConstants: {
+        TRIAL_API_URL: '"https://trial.hyacinth.cn/api/tinyapp"',
+        PRODUCTION_API_URL: '"https://prod.hyacinth.cn/api/tinyapp"',
+        DEVELOPMENT_API_URL: '"https://dev.hyacinth.cn/api/tinyapp"',
     },
-    lessLoaderOption: {
-      lessOptions: {
-        modifyVars: {
-          hack: `true; @import "${npath.join(
-            process.cwd(),
-            "src/styles/index.less"
-          )}";`,
+    projectName: pkg.name,
+    date: "2024-11-11",
+    designWidth: 750,
+    deviceRatio: {
+        640: 2.34 / 2,
+        750: 1,
+        375: 2,
+        828: 1.81 / 2,
+    },
+    sourceRoot: "src",
+    outputRoot: process.env.TARO_ENV,
+    alias: {
+        src: npath.resolve(process.cwd(), "src"),
+    },
+    framework: "react",
+    compiler: "webpack5",
+    hmr: true,
+    cache: {
+        enable: true, // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
+    },
+    mini: {
+        webpackChain(chain) {
+            miniChain(chain);
         },
-      },
-      // 适用于全局引入样式
-      additionalData: "@import '/src/styles/index.less';",
-    },
-    postcss: {
-      autoprefixer: {
-        enable: true,
-        config: {},
-      },
-      pxtransform: {
-        enable: true,
-        config: {},
-      },
-      url: {
-        enable: true,
-        config: {
-          limit: 1024, // 设定转换尺寸上限
+        lessLoaderOption: {
+            lessOptions: {
+                modifyVars: {
+                    hack: `true; @import "${npath.join(
+                        process.cwd(),
+                        "src/styles/index.less"
+                    )}";`,
+                },
+            },
+            // 适用于全局引入样式
+            additionalData: "@import '/src/styles/index.less';",
         },
-      },
-      cssModules: {
-        enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
-        config: {
-          namingPattern: "module", // 转换模式，取值为 global/module
-          generateScopedName: "[name]__[local]___[hash:base64:5]",
+        postcss: {
+            autoprefixer: {
+                enable: true,
+                config: {},
+            },
+            pxtransform: {
+                enable: true,
+                config: {},
+            },
+            url: {
+                enable: true,
+                config: {
+                    limit: 1024, // 设定转换尺寸上限
+                },
+            },
+            cssModules: {
+                enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
+                config: {
+                    namingPattern: "module", // 转换模式，取值为 global/module
+                    generateScopedName: "[name]__[local]___[hash:base64:5]",
+                },
+            },
+            htmltransform: {
+                enable: true,
+                // 设置成 false 表示 不去除 * 相关的选择器区块
+                // 假如开启这个配置，它会把 tailwindcss 整个 css var 的区域块直接去除掉
+                config: {
+                    removeCursorStyle: false,
+                },
+            },
+            tailwindcss: {
+                enable: true
+            }
         },
-      },
+        miniCssExtractPluginOption: {
+            ignoreOrder: true,
+        },
+        optimizeMainPackage: {
+            enable: true,
+        },
     },
-    miniCssExtractPluginOption: {
-      ignoreOrder: true,
-    },
-    optimizeMainPackage: {
-      enable: true,
-    },
-  },
-  plugins: [["@tarojs/plugin-framework-react", { reactMode: "concurrent" }]],
+    plugins: [["@tarojs/plugin-framework-react", { reactMode: "concurrent" }]],
 };
 
 module.exports = function (merge) {
-  return merge({}, config, require(`./${process.env.NODE_ENV}`));
+    return merge({}, config, require(`./${process.env.NODE_ENV}`));
 };
