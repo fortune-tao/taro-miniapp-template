@@ -1,4 +1,4 @@
-import Taro from "@tarojs/taro";
+import Taro from '@tarojs/taro';
 // import { OSS_ROOT } from "src/constant/index";
 
 export const getCookie = () => {};
@@ -19,9 +19,9 @@ export const getCookie = () => {};
  * @param msg 需要被复制到剪贴板的字符串消息
  */
 export const copy = (msg: string) => {
-  Taro.setClipboardData({
-    data: msg,
-    success: () => Taro.showToast({ title: "复制成功" }),
-    fail: () => Taro.showToast({ title: "复制失败" }),
-  });
+    Taro.setClipboardData({
+        data: msg,
+        success: () => Taro.showToast({ title: '复制成功' }),
+        fail: () => Taro.showToast({ title: '复制失败' }),
+    });
 };

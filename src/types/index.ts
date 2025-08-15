@@ -1,1 +1,1 @@
-export type TARO_ENV = "weapp" | "alipay";
+export type TARO_ENV = 'weapp' | 'alipay';

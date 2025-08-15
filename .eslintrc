@@ -1,7 +1,63 @@
 {
-  "extends": ["taro/react"],
-  "rules": {
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off"
-  }
+    "extends": [
+        "taro/react"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "react",
+        "react-hooks"
+    ],
+    "rules": {
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-explicit-any": "warn",
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/jsx-indent": ["warn", 4],
+        "react/jsx-indent-props": ["warn", 4],
+        "react/jsx-closing-bracket-location": ["warn", "line-aligned"],
+        "react/jsx-closing-tag-location": "warn",
+        "react/jsx-curly-spacing": ["warn", "never"],
+        "react/jsx-equals-spacing": ["warn", "never"],
+        "react/jsx-first-prop-new-line": ["warn", "multiline"],
+        "react/jsx-max-props-per-line": ["warn", { "maximum": 1, "when": "multiline" }],
+        "react/jsx-one-expression-per-line": ["warn", { "allow": "single-child" }],
+        "react/jsx-props-no-multi-spaces": "warn",
+        "react/jsx-tag-spacing": [
+            "warn",
+            {
+                "closingSlash": "never",
+                "beforeSelfClosing": "always",
+                "afterOpening": "never",
+                "beforeClosing": "never"
+            }
+        ]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "env": {
+        "browser": true,
+        "es2020": true,
+        "node": true
+    }
 }

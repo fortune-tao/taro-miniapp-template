@@ -1,4 +1,4 @@
-import { getAccountInfoSync } from "@tarojs/taro";
+import { getAccountInfoSync } from '@tarojs/taro';
 // import store from "src/store";
 // import dayjs from "dayjs";
 
@@ -13,18 +13,18 @@ import { getAccountInfoSync } from "@tarojs/taro";
  * 不过可以参考该方法实现小程序在不同运行环境下的动态配置。
  */
 export const getApiUrl = () => {
-  // 获取小程序账户信息对象，包含环境版本等配置信息
-  const acountInfo = getAccountInfoSync();
+    // 获取小程序账户信息对象，包含环境版本等配置信息
+    const acountInfo = getAccountInfoSync();
 
-  // 根据小程序环境版本匹配对应的API地址
-  switch (acountInfo.miniProgram.envVersion) {
-    case "release":
-      return PRODUCTION_API_URL; // 生产环境
-    case "trial":
-      return TRIAL_API_URL; // 体验环境
-    default:
-      return DEVELOPMENT_API_URL; // 开发环境
-  }
+    // 根据小程序环境版本匹配对应的API地址
+    switch (acountInfo.miniProgram.envVersion) {
+        case 'release':
+            return PRODUCTION_API_URL; // 生产环境
+        case 'trial':
+            return TRIAL_API_URL; // 体验环境
+        default:
+            return DEVELOPMENT_API_URL; // 开发环境
+    }
 };
 
 /** 请求状态 */
